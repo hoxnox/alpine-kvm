@@ -8,7 +8,7 @@ step() {
 
 
 step 'Set up timezone'
-setup-timezone -z Europe/Prague
+setup-timezone -z Europe/Paris
 
 step 'Set up networking'
 cat > /etc/network/interfaces <<-EOF
@@ -32,3 +32,23 @@ rc-update add crond default
 rc-update add net.eth0 default
 rc-update add net.lo boot
 rc-update add termencoding boot
+
+step 'Create KVM default user'
+adduser --home /home/kvm --shell /bin/bash --ingroup libvirt
+
+step 'Enable KVM services'
+rc-update add libvirt default
+rc-update add libvirt default
+
+step 'Adding KVM kernel modules'
+echo "tun bridge" | tee -a /etc/modules
+
+step 'Enable KVM remote access'
+cat > /etc/polkit-1/localauthority/50-local.d/50-libvirt-ssh-remote-access-policy.pkla <<-EOF
+[Remote libvirt SSH access]
+ Identity=unix-group:libvirt
+ Action=org.libvirt.unix.manage
+ ResultAny=yes
+ ResultInactive=yes
+ ResultActive=yes
+EOF

@@ -1,0 +1,8 @@
+chrony
+less
+logrotate
+dropbear
+libvirt-daemon
+qemu-img
+qemu-system-x86_64
+sudo
