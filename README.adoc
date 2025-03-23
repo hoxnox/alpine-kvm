@@ -35,6 +35,8 @@ wget https://raw.githubusercontent.com/{gh-name}/v{version}/{script-name} \
     && echo '{script-sha1}  {script-name}' | sha1sum -c \
     || exit 1
 
+sudo ./alpine-make-vm-image --keys-dir keys --image-format qcow2 --image-size 100G --repositories-file example/repositories --packages "$(cat example/packages)" --script-chroot alpine-virthardened-$(date +%Y-%m-%d).qcow2 -- ./example/configure.sh
+
 
 == Pitfalls
 

@@ -8,7 +8,7 @@ step() {
 
 
 step 'Set up timezone'
-setup-timezone -z Europe/Prague
+setup-timezone -z Europe/Moscow
 
 step 'Set up networking'
 cat > /etc/network/interfaces <<-EOF
