@@ -392,7 +392,7 @@ temp_dir=''
 if ! command -v "$APK" >/dev/null; then
 	einfo "$APK not found, downloading static apk-tools"
 
-	temp_dir="$(mktemp -d ~/tmp/$PROGNAME.XXXXXX)"
+	temp_dir="$(mktemp -d /tmp/$PROGNAME.XXXXXX)"
 	wgets "$APK_TOOLS_URI" "$APK_TOOLS_SHA256" "$temp_dir"
 	APK="$(ls "$temp_dir"/apk.static)"
 	chmod +x "$APK"
